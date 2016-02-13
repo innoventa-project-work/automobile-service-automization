@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="VO.modelVO" table="model">
+		
+		<id name="modelid" type="int" column="modelid">
+			<generator class="increment" />
+		</id>
+		
+		<property name="modelName">
+			<column name="modelName" />
+		</property>
+		
+		<property name="modelDescription">
+			<column name="modelDescription" />
+		</property>
+		<many-to-one class="VO.companyVO" name="cv" column="comid"></many-to-one>
+	</class>
+</hibernate-mapping>

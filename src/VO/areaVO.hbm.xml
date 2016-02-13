@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="VO.areaVO" table="area">
+		
+		<id name="areaID" type="int" column="aid">
+			<generator class="increment" />
+		</id>
+		
+		<property name="areaName">
+			<column name="areaName" />
+		</property>
+		
+		<property name="areaDescription">
+			<column name="areaDescription" />
+		</property>
+		<many-to-one class="VO.cityVO" name="cv" column="cityId"></many-to-one>
+	</class>
+</hibernate-mapping>
