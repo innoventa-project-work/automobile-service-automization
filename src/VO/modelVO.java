@@ -4,7 +4,20 @@ public class modelVO {
 	private int modelid;
 	private String modelName,modelDescription;
 	companyVO companyVO;
-	companyVO cv = new VO.companyVO();
+	VehicleCategoryVO  vcVO;
+	
+	public companyVO getCompanyVO() {
+		return companyVO;
+	}
+	public void setCompanyVO(companyVO companyVO) {
+		this.companyVO = companyVO;
+	}
+	public VehicleCategoryVO getVcVO() {
+		return vcVO;
+	}
+	public void setVcVO(VehicleCategoryVO vcVO) {
+		this.vcVO = vcVO;
+	}
 	public int getModelid() {
 		return modelid;
 	}
@@ -23,18 +36,4 @@ public class modelVO {
 	public void setModelDescription(String modelDescription) {
 		this.modelDescription = modelDescription;
 	}
-	public companyVO getCompanyVO() {
-		return companyVO;
-	}
-	public void setCompanyVO(companyVO companyVO) {
-		this.companyVO = companyVO;
-	}
-	public companyVO getCv() {
-		return cv;
-	}
-	public void setCv(companyVO cv) {
-		this.cv = cv;
-	}
-	
-
 }

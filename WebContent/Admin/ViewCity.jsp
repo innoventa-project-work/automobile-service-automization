@@ -80,12 +80,12 @@
 				<td>${i.cityDescription}</td>
 				<td>${i.sv.stateName}</td>
 				<td>
-				<div class="btn-group mb-sm"><button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" type="button" >Action<span class="caret"></span></button>
-				<ul class="dropdown-menu" role="menu">
-				<li><a href="<%=request.getContextPath()%>/cityController?flag=editCity&cityId=${i.cityId}">Edit</a></li>
-				<li><a href="">DELETE</a></li>
-				</ul>
-				</div>
+					<div class="btn-group mb-sm"><button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" type="button" >Action<span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="<%=request.getContextPath()%>/cityController?flag=editCity&cityId=${i.cityId}">Edit</a></li>
+							<li><a href="">DELETE</a></li>
+						</ul>
+					</div>
 				</td>
 			</tr>
 			

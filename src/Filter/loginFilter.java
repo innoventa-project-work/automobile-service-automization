@@ -1,8 +1,7 @@
-
-
 package Filter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -15,6 +14,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Request;
 
 import DAO.loginDAO;
 import VO.loginVO;
@@ -53,12 +54,12 @@ public class loginFilter implements Filter {
 		
 		String uri = ((HttpServletRequest)request).getRequestURI();
 
-		System.err.println("uri before condition : "+uri);
+		/*System.err.println("uri before condition : "+uri);*/
 		
 		if(uri.contains("addUser") || uri.contains("/css") || (uri.contains("/js") && !uri.contains(".jsp")) || (uri.contains("/JASON")) || (uri.contains("/JSON")) || uri.contains("/img")|| uri.contains("/fonts") ||uri.contains("/Registration") || uri.contains("regController") ||  uri.contains("/index"))
 		{
 			//System.out.println("inside reg");
-			System.out.println("uri Passed : "+uri);
+			/*System.out.println("uri Passed : "+uri);*/
 			//requestDispatcher = request.getRequestDispatcher("/user/register.jsp");  
 			//requestDispatcher.forward(request,response);  
 			chain.doFilter(request,response);
@@ -101,6 +102,7 @@ public class loginFilter implements Filter {
 				System.out.println(y);
 				if(type.equalsIgnoreCase("admin"))
 				{
+					/*session.setAttribute("userID",y); */
 					requestDispatcher = request.getRequestDispatcher("/Admin/Index.jsp");  
 					requestDispatcher.forward(request,response);
 				}
@@ -109,14 +111,14 @@ public class loginFilter implements Filter {
 					requestDispatcher = request.getRequestDispatcher("/Admin/Index.jsp");  
 					requestDispatcher.forward(request,response);
 				}
-				else if(type.equalsIgnoreCase("workshopmanager"))
+				else if(type.equalsIgnoreCase("wm"))
 				{
-					requestDispatcher = request.getRequestDispatcher("/Admin/Index.jsp");  
+					requestDispatcher = request.getRequestDispatcher("/WM/Index.jsp");  
 					requestDispatcher.forward(request,response);
 				}
 				else if(type.equalsIgnoreCase("user"))
 				{
-					requestDispatcher = request.getRequestDispatcher("/User/kaib.jsp");  
+					requestDispatcher = request.getRequestDispatcher("/User/userHome.jsp");  
 					requestDispatcher.forward(request,response);
 				}
 				else
@@ -127,6 +129,12 @@ public class loginFilter implements Filter {
 			}
 			else
 			{
+				/*PrintWriter out = response.getWriter();
+				out.println("<html>");
+				out.println("<head>");
+				out.println("<script> alert(invalid);</script>");
+				out.println("</head>");
+				out.println("</html>");*/
 				requestDispatcher = request.getRequestDispatcher("/User/login.jsp");
 				requestDispatcher.forward(request,response);
 			}	
@@ -137,19 +145,41 @@ public class loginFilter implements Filter {
 			//System.out.println("type = = = " + h);
 			
 			if(h!=null && h.equals("admin")){
-				
+			  //&& uri.contains("/Admin")
 				//System.out.println("chain");
+				if(uri.contains("/Staff") | uri.contains("/WM") | uri.contains("/User"))
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/User/error.jsp");  
+					rd.forward(request,response);
+				}
 				chain.doFilter(request,response);
-			}
-			
+			}	
 			else if(h!=null && h.equals("staff"))
 			{
 				//System.out.println("chain");
+				if(uri.contains("/Admin") | uri.contains("/WM") | uri.contains("/User"))
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/User/error.jsp");  
+					rd.forward(request,response);
+				}
 				chain.doFilter(request, response);
 			}
 			else if(h!=null && h.equals("user"))
 			{
-				//System.out.println("chain");
+				if(uri.contains("/Staff") | uri.contains("/WM") | uri.contains("/Admin"))
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/User/error.jsp");  
+					rd.forward(request,response);
+				}
+				chain.doFilter(request, response);
+			}
+			else if(h!=null && h.equals("wm"))
+			{
+				if(uri.contains("/Staff") | uri.contains("/Admin") | uri.contains("/User"))
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/User/error.jsp");  
+					rd.forward(request,response);
+				}
 				chain.doFilter(request, response);
 			}
 			else
@@ -171,5 +201,4 @@ public class loginFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}
-
 }

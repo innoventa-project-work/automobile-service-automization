@@ -149,11 +149,11 @@
             <!-- START Right Navbar-->
             <ul class="nav navbar-nav navbar-right">
                <!-- Search icon-->
-               <li>
+              <!--  <li>
                   <a href="#" data-toggle="navbar-search">
                      <em class="fa fa-search"></em>
                   </a>
-               </li>
+               </li> -->
                <!-- START Alert menu-->
                <li class="dropdown dropdown-list">
                   <a href="#" data-toggle="dropdown" data-play="fadeIn" class="dropdown-toggle">

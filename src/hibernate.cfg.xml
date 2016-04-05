@@ -25,5 +25,8 @@
 		<mapping resource="VO/modelVO.hbm.xml" />
 		<mapping resource="VO/regVO.hbm.xml" />
 		<mapping resource="VO/loginVO.hbm.xml" />
+		<mapping resource="VO/workshopVO.hbm.xml" />
+		<mapping resource="VO/wmVO.hbm.xml" />
+		<mapping resource="VO/staffVO.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

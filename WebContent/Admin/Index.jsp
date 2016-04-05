@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en" class="no-ie">
 <head>
 <base href="${pageContext.request.contextPath}/Admin/">
    <!-- Meta-->
-   <meta charset="utf-8">
+   <meta /."utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
    <meta name="description" content="">
    <meta name="keywords" content="">
    <meta name="author" content="">
-   <title>Wintermin - Bootstrap Admin Theme</title>
+   <title>Autozone Admin</title>
    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
    <!-- Bootstrap CSS-->
@@ -21,7 +22,7 @@
    <link rel="stylesheet" href="css/animate+animo.css">
    <link rel="stylesheet" href="css/csspinner.min.css">
    <!-- START Page Custom CSS-->
-   <!-- END Page Custom CSS-->
+<!-- END Page Custom CSS-->
    <!-- App CSS-->
    <link rel="stylesheet" href="css/app.css">
    <!-- Modernizr JS Script-->
@@ -55,8 +56,11 @@
                <br>
                <small>Welcome user</small>
             </h3>
-            <div data-toggle="notify" data-onload data-message="&lt;b&gt;Welcome Visitor!&lt;/b&gt; Dismiss this message with a click or wait for it to disappear." data-options="{&quot;status&quot;:&quot;danger&quot;, &quot;pos&quot;:&quot;top-right&quot;}"
-            class="hidden-xs"></div>
+            
+            <div data-toggle="notify" data-onload data-message="&lt;b&gt;Welcome Admin !&lt;/b&gt; Dismiss this message with a click or wait for it to disappear." data-options="{&quot;status&quot;:&quot;danger&quot;, &quot;pos&quot;:&quot;top-right&quot;}"
+            class="hidden-xs">
+            </div>
+            
             <div class="row">
                <!-- START dashboard main content-->
                <section class="col-md-9">
@@ -447,7 +451,6 @@
          </div>
          <!-- END Page content-->
          <!-- START Page footer-->
-         <footer>&copy; 2014 - Wintermin</footer>
          <!-- END Page Footer-->
       </section>
       <!-- END Main section-->

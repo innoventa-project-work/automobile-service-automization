@@ -67,7 +67,8 @@
                                  <th>No.</th>
                                  <th  class="sort-alpha">AMC Name</th>
                                  <th>AMC Price</th>
-                                 <th>AMC Description</th>    
+                                 <th>AMC Description</th>
+                                 <th>Action</th>    
                               </tr>
                            </thead>
                            <tbody>
@@ -77,10 +78,17 @@
 									<td>${i.amctitle}</td>
 									<td>${i.amcprice}</td>
 									<td>${i.amcdesc}</td>
-									
+									<td>
+										<div class="btn-group mb-sm"><button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" type="button" >Action<span class="caret"></span></button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="<%=request.getContextPath()%>/AmcController?flag=editAmc&amcId=${i.amcid}">Edit</a></li>
+												<li><a href="">DELETE</a></li>
+											</ul>
+										</div>
+									</td>
 								</tr>
 							</c:forEach>
-             				 <c:remove var="cityList" scope="session" /> 
+             				 <c:remove var="AmcList" scope="session" /> 
               			</tbody>
                         </table>
                      </div>

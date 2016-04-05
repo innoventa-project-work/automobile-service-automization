@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class serviceVO implements Serializable{
 private int serviceId;
 private String serviceName,serviceDescription;
-VehicleCategoryVO VehicleCategoryVO;
 VehicleCategoryVO vc = new VehicleCategoryVO();
 public String getServiceName() {
 	return serviceName;
@@ -25,12 +24,7 @@ public String getServiceDescription() {
 public void setServiceDescription(String serviceDescription) {
 	this.serviceDescription = serviceDescription;
 }
-public VehicleCategoryVO getVehicleCategoryVO() {
-	return VehicleCategoryVO;
-}
-public void setVehicleCategoryVO(VehicleCategoryVO vehicleCategoryVO) {
-	VehicleCategoryVO = vehicleCategoryVO;
-}
+
 public VehicleCategoryVO getVc() {
 	return vc;
 }

@@ -57,4 +57,45 @@ public class loginDAO implements  Serializable {
 		
 	}
 
+	public List searchLoginDetails(loginVO loginVO) {
+		// TODO Auto-generated method stub
+		List ls= null;
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			Query w=session.createQuery("from loginVO");
+			
+			ls=w.list();
+			
+			tr.commit();
+			
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
+	}
+
+	public void addWM(loginVO loginVO) {
+		// TODO Auto-generated method stub
+		try
+		 {
+			 SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			 Session session = sessionFactory.openSession();
+			 Transaction tr = session.beginTransaction();
+			 session.save(loginVO);
+			 tr.commit();
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.println(e);
+		 }
+	}
+
 }

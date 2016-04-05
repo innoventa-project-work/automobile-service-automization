@@ -12,7 +12,7 @@ import VO.serviceVO;
 
 public class serviceDAO {
 
-	public static List searchCategory(VehicleCategoryVO vc) {
+	public List searchCategory(VehicleCategoryVO vc) {
 		// TODO Auto-generated method stub
 		List ls = null;
 		try
@@ -21,7 +21,6 @@ public class serviceDAO {
 			Session session =sessionFactory.openSession();
 			Query w=session.createQuery("from VehicleCategoryVO");
 			ls=w.list();
-			System.out.println("category list size ::"+ls);
 		}
 		catch(Exception z)
 		{
@@ -44,8 +43,6 @@ public class serviceDAO {
 		 {
 			 System.out.println(e);
 		 }
-
-		
 	}
 
 	public static List searchServices(serviceVO sv) {
@@ -66,4 +63,36 @@ public class serviceDAO {
 		return ls;
 	}
 
+	public List editService(serviceVO serviceVO) {
+		// TODO Auto-generated method stub
+		List ls = null;
+		try
+		{
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session =sessionFactory.openSession();
+			Query w=session.createQuery("from serviceVO where serviceId = '"+serviceVO.getServiceId()+"' ");
+			ls=w.list();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
+	}
+
+	public void updateService(serviceVO serviceVO) {
+		// TODO Auto-generated method stub
+		try
+		 {
+			 SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			 Session session = sessionFactory.openSession();
+			 Transaction tr = session.beginTransaction();
+			 session.saveOrUpdate(serviceVO);
+			 tr.commit();
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.println(e);
+		 }
+	}
 }

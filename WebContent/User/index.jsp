@@ -6,7 +6,7 @@
 <base href="${pageContext.request.contextPath}/User/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
-<title>Autozone, Home-1</title>
+<title>Autozone, Home</title>
 <link href="favicon.png" type="image/x-icon" rel="shortcut icon">
 <link href="css/master.css" rel="stylesheet">
 <link href="css/iview.css" rel="stylesheet">
@@ -97,17 +97,9 @@
           </div>
             </div>
           </div>
-            
-          
         </div>
 
-        
-        
       </div>      </div>
-      
-
-      
-
     <!-- end main-slider -->
     
     <section class="section_mod-a section-bg-2">

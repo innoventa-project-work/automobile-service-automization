@@ -27,7 +27,7 @@
       <div class="header__inner">
         <div class="container">
           <div class="row">
-            <div class="col-md-12 col-xs-12"> <a href="index.html" class="logo"> <img class="logo__img img-responsive" src="img/logo.png" height="50" width="111" alt="Logo"> </a>
+            <div class="col-md-12 col-xs-12"> <a href="index.jsp" class="logo"> <img class="logo__img img-responsive" src="img/logo.png" height="50" width="111" alt="Logo"> </a>
               <div class="navbar yamm">
                 <div class="navbar-header hidden-md hidden-lg hidden-sm">
                   <button type="button" data-toggle="collapse" data-target="#navbar-collapse-1" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>

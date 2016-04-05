@@ -74,6 +74,7 @@ public class areaController extends HttpServlet {
 	private void loadState(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("state controller loaded");
 		int countryId=Integer.parseInt(request.getParameter("countryId"));
 		CountryVO countryVo=new CountryVO();
 		countryVo.setCid(countryId);
@@ -81,6 +82,8 @@ public class areaController extends HttpServlet {
 		List ls = cityDao.loadState(countryVo);
 		HttpSession session = request.getSession();
 		session.setAttribute("stateList", ls);
+		System.out.println(ls.size());
+		System.out.println("going to json");
 		response.sendRedirect("Admin/JASON/loadState.jsp");
 	}
 
@@ -123,7 +126,6 @@ public class areaController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("countryList", ls);
 		response.sendRedirect("Admin/AddArea.jsp");
-		
 	}
 
 	/**

@@ -62,23 +62,16 @@
                      <c:forEach items="${sessionScope.stateList}" var="j">
                       <fieldset>
                         <div class="form-group">
-
-                            <!-- <div class="btn-group">
-                             <button class="btn btn-default dropdown-toggle" data-play="fadeIn" data-toggle="dropdown">Kai b<b class="caret"></b>
-                             </button> -->
-                             <label class="col-sm-2 control-label">Select Country</label>
-						<div class="col-sm-10">
-                        <select class="form-control m-b" name="countryName">
-                        <!-- <option value="0"> Select Country</option>
-                         -->	<c:forEach items="${sessionScope.countrylist }" var="i">
-                        		<option class="default" value="${i.cid}">${i.countryname}</option>
-                        	</c:forEach>
-                        </select>
-                    
-                     </div>
-                      </div>
+                           	<label class="col-sm-2 control-label">Select Country</label>
+							<div class="col-sm-10">
+                        		<select class="form-control m-b" name="countryName">
+                        			<c:forEach items="${sessionScope.countrylist }" var="i">
+                        				<option class="default" value="${i.cid}">${i.countryname}</option>
+                        			</c:forEach>
+                        		</select>
+                     		</div>
+                      	</div>
                      </fieldset>
-                     
                      
                      <fieldset>
                         <div class="form-group">

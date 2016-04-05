@@ -37,5 +37,4 @@ public cityVO getCv() {
 public void setCv(cityVO cv) {
 	this.cv = cv;
 }
-
 }

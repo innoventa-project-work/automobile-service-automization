@@ -2,11 +2,9 @@
     pageEncoding="ISO-8859-1"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><html lang="en" class="no-ie">
-
-
+<html>
 <head>
-<base href="${pageContext.request.contextPath}/Admin">
+<base href="${pageContext.request.contextPath}/Admin/">
    <!-- Meta-->
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
@@ -50,42 +48,48 @@
          <div class="main-content">
             <h3>Edit Model
                <br>
-<!--                <small>Add states for user selection.</small> -->
             </h3>
             <!-- START row-->
-            
             <!-- END row-->
             <!-- START panel-->
             <div class="panel panel-default">
                <div class="panel-heading">Edit Model</div>
                <div class="panel-body">
                   <form method="post" action="<%=request.getContextPath()%>/modelController" class="form-horizontal">
-                     
+                      <c:forEach items="${sessionScope.modelList}" var="j">
                       <fieldset>
                         <div class="form-group">
-
-                            <!-- <div class="btn-group">
-                             <button class="btn btn-default dropdown-toggle" data-play="fadeIn" data-toggle="dropdown">Kai b<b class="caret"></b>
-                             </button> -->
-                             <label class="col-sm-2 control-label">Select Company</label>
-						<div class="col-sm-10">
-                        <select class="form-control m-b" name="companyName">
-                        <!-- <option value="0"> Select Country</option>
-                         -->	<c:forEach items="${sessionScope.companylist }" var="i">
-                        		<option class="default" value="${i.comid}">${i.companyName}</option>
-                        	</c:forEach>
-                        </select>
-                    
-                     </div>
-                      </div>
+                           <label class="col-sm-2 control-label">Select Category</label>
+								<div class="col-sm-10">
+                        			<select class="form-control m-b" name="categoryName">
+                        				<option value="0"> Select Category</option>
+			                        	<c:forEach items="${sessionScope.categoryList }" var="i">
+			                        		<option class="default" value="${i.vcid}">${i.category}</option>
+			                        	</c:forEach>
+			                        </select>
+                     			</div>
+                      	</div>
                      </fieldset>
-                     
-                     <c:forEach items="${sessionScope.modelList}" var="j">
+					 
+					 <fieldset>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Select Company</label>
+								<div class="col-sm-10">
+                        			<select class="form-control m-b" name="companyName">
+                        				<option value="0"> Select Company</option>
+			                        	<c:forEach items="${sessionScope.companyList }" var="k">
+			                        		<option class="default" value="${k.comid}">${k.companyName}</option>
+			                        	</c:forEach>
+			                        </select>
+                     			</div>
+                      	</div>
+                     </fieldset>
+					 	                    
                      <fieldset>
                         <div class="form-group">
                            <label class="col-sm-2 control-label">Model Name</label>
                            <div class="col-sm-10">
-                              <input type="text" value="${j.modelName}" name="modelName" required="required" placeholder="State Name" class="form-control">
+                              <input type="text" value="${j.modelName}" name="modelName" required="required" placeholder="Model Name" class="form-control">
                            </div>
                         </div>
                      </fieldset>
@@ -94,7 +98,7 @@
                         <div class="form-group">
                            <label class="col-sm-2 control-label">Model Description</label>
                            <div class="col-sm-10">
-                              <textarea name="modelDescription" required="required"  placeholder="State Description" class="form-control">${j.modelDescription}</textarea>
+                              <textarea name="modelDescription" required="required"  placeholder="Model Description" class="form-control">${j.modelDescription}</textarea>
                            </div>
                         </div>
                      </fieldset>

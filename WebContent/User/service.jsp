@@ -424,7 +424,6 @@
 										<button class="btn-skew-r btn-effect "><span class="btn-skew-r__inner">filter vehicles</span></button>
 									</div>
 								</div>
-
 							</aside>
 						</div><!-- end col -->
 					</div><!-- end row -->
@@ -496,10 +495,6 @@
 		</div><!-- end layout-theme -->
 
 		<span class="scroll-top"> <i class="fa fa-angle-up"> </i></span>
-
-
-
-		
 
 		<!-- SCRIPTS -->
         <script src="js/jquery-migrate-1.2.1.js"></script>

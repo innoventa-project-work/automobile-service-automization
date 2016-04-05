@@ -30,7 +30,6 @@ public class modelDAO {
 			z.printStackTrace();
 		}
 		return ls;
-		
 	}
 
 	public static void InsertModel(modelVO mv) {
@@ -113,4 +112,46 @@ public class modelDAO {
 		}
 	}
 
+	public List SearchVehCategory(VehicleCategoryVO vcVO) {
+		// TODO Auto-generated method stub
+		List ls=null;
+		try
+		{
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session =sessionFactory.openSession();
+			Query w=session.createQuery("from VehicleCategoryVO");
+			ls=w.list();
+			System.out.println("category list size ::"+ls);
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
+	}
+
+
+	public List loadModel(VehicleCategoryVO vcVO) {
+		// TODO Auto-generated method stub
+		List ls=null;
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			Query w=session.createQuery("from companyVO where vc='"+vcVO.getVcid()+"'");
+			
+			ls=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
+	}
 }

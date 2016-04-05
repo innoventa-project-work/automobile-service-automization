@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en" class="no-ie">
 <!--<![endif]-->
-
 <head>
 <base href="${pageContext.request.contextPath}/User/">
 	<!-- Menu css & js  -->
@@ -98,5 +97,4 @@
    <script src="js/pages.js"></script>
    <!-- END Scripts-->
 </body>
-
 </html>

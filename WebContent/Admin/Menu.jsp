@@ -22,13 +22,18 @@
                   <!-- START SubMenu item-->
                   <ul class="nav collapse ">
                      <li>
-                        <a href="ViewLoginDetails.jsp" title="View User Login Details" data-toggle="" class="no-submenu">
+                        <a href="<%=request.getContextPath()%>/loginController?flag=searchLogin" title="View User Login Details" data-toggle="" class="no-submenu">
                            <span class="item-text">View User Login Details</span>
                         </a>
                      </li>
                      <li>
-                        <a href="ViewUserInfo.jsp" title="View User Information" data-toggle="" class="no-submenu">
+                        <a href="<%=request.getContextPath()%>/regController?flag=searchUser" title="View User Information" data-toggle="" class="no-submenu">
                            <span class="item-text">View User Information</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="<%=request.getContextPath()%>/wmController?flag=searchCountry" title="Add Workshop Manager" data-toggle="" class="no-submenu">
+                           <span class="item-text">Add Workshop Manager</span>
                         </a>
                      </li>
                   </ul>
@@ -54,6 +59,28 @@
                   </ul>
                   <!-- END SubMenu item-->
                </li>
+               
+               <li>
+                  <a href="#" title="AMC" data-toggle="collapse-next" class="has-submenu">
+                     <em class="fa fa-calendar-o"></em>
+                     <span class="item-text">Manage Workshop</span>
+                  </a>
+                  <!-- START SubMenu item-->
+                  <ul class="nav collapse ">
+                     <li>
+                        <a href="<%=request.getContextPath()%>/workshopController?flag=searchCountry" title="Add Workshop" data-toggle="" class="no-submenu">
+                           <span class="item-text">Add Workshop</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="<%=request.getContextPath()%>/workshopController?flag=searchWorkshop" title="View Workshop" data-toggle="" class="no-submenu">
+                           <span class="item-text">View Workshop</span>
+                        </a>
+                     </li>
+                  </ul>
+                  <!-- END SubMenu item-->
+               </li>
+               
             <!--    <li class="nav-heading">More</li>  -->
                <li>
                   <a href="#" title="AMC" data-toggle="collapse-next" class="has-submenu">
@@ -153,7 +180,7 @@
                   <!-- START SubMenu item-->
                   <ul class="nav collapse ">
                      <li>
-                        <a href="<%=request.getContextPath()%>/modelController?flag=searchCompany" title="Add Vehicle model" data-toggle="" class="no-submenu">
+                        <a href="<%=request.getContextPath()%>/modelController?flag=searchCategory" title="Add Vehicle model" data-toggle="" class="no-submenu">
                            <span class="item-text">Add Vehicle Model</span>
                         </a>
                      </li>

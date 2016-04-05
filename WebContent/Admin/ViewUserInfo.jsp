@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -49,16 +50,13 @@
          <div class="main-content">
             <h3>View User Information
                <br>
-<!--                <small>User Inforamation.</small> -->
             </h3>
             <!-- START DATATABLE 1 -->
             <div class="row">
                <div class="col-lg-12">
                   <div class="panel panel-default">
-                    <!--  <div class="panel-heading">Data Tables |
-                        <small>Zero Configuration</small>
-                     </div>  -->
-                     <div class="panel-body">
+                      <div class="panel-body">
+                      
                         <table id="datatable1" class="table table-striped table-hover">
                            <thead>
                               <tr>
@@ -67,18 +65,31 @@
                                  <th>User Type</th>
                                  <th>First Name</th>
                                  <th>Last Name</th>
-                                 <th>AMC</th>
                                  <th>Contact</th>
                                  <th>Gender</th>
                                  <th>Dob</th>
                                  <th>Coutry</th>
                                  <th>State</th>
                                  <th>City</th>
-                                 
-                                 
                               </tr>
                            </thead>
-                           
+                           <tbody>
+                           <c:forEach items="${sessionScope.userList}" var="i">
+                           		<tr>
+                           			<td>${i.regId}</td>
+                           			<td>${i.loginVO.email}</td>
+                           			<td>${i.loginVO.userType}</td>
+                           			<td>${i.fName}</td>
+                           			<td>${i.lName}</td>
+                           			<td>${i.contactno}</td>
+                           			<td>${i.gender}</td>
+                           			<td>${i.dob}</td>
+                           			<td>${i.countryVO.countryname}</td>
+                           			<td>${i.stateVO.stateName}</td>
+                           			<td>${i.cityvo.cityName}</td>
+                           		</tr>
+                           </c:forEach>
+                           </tbody>
                         </table>
                      </div>
                   </div>

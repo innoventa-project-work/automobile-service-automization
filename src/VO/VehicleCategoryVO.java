@@ -1,6 +1,8 @@
 package VO;
 
-public class VehicleCategoryVO {
+import java.io.Serializable;
+
+public class VehicleCategoryVO implements Serializable {
 	private int vcid;
 	private String category,categorydescription;
 	public int getVcid() {

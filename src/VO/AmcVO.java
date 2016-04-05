@@ -1,6 +1,8 @@
 package VO;
 
-public class AmcVO 
+import java.io.Serializable;
+
+public class AmcVO implements Serializable
 {
 	private int amcid;
 	private String amctitle,amcprice,amcdesc;

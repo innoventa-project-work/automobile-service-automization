@@ -29,22 +29,33 @@
 			
 			function validation()
 			{	
-				var pass=document.getElementById("pass").value;
-		        var cpass=document.getElementById("cpass").value;
-		        if (cpass != pass) {
-		        	document.getElementById("cpassLabel").innerHTML="password does not match" 
-		        		$(document).ready(function() {
-							 $('#register').attr('disabled', 'disabled');
-				        });
-		            return false;
-		        }
-		        else
-		        {
-		        	document.getElementById("cpassLabel").innerHTML=" "
-			        $('#register').removeAttr('disabled');	
-		        }
-		        
-		    }
+				 var pass=document.getElementById("pass").value;
+				   var cpass=document.getElementById("cpass").value;
+				   
+				   if(pass==cpass)
+					   {
+					   document.getElementById("passsuccess").innerHTML="password match";
+					   document.getElementById("passerror").innerHTML="";
+					   if(document.getElementById("emailid").innerHTML==""){
+					   $(document).ready(function(){
+						   $('#register').attr('disabled','disabled');
+					   });
+					   }
+					   else if(document.getElementById("emailid").innerHTML=="Already registered"){
+						   $('#register').attr('disabled','disabled');
+					   }
+					   else if((document.getElementById("emailid").innerHTML=="Available")){
+						   $('#register').removeAttr('disabled');
+					   }
+					   }
+				   
+				   else{
+					   document.getElementById("passsuccess").innerHTML="";
+					   document.getElementById("passerror").innerHTML="password does not match";
+					   $('#register').attr('disabled','disabled');
+				   }
+			   }
+		    
 			
 			/* function kaik()
 			{
@@ -72,22 +83,39 @@
 				{
 					if (xmlhttp1.readyState == 4 && xmlhttp1.status==200)
 					{
-						var jsonArray = JSON.parse(xmlhttp1.responseText);
-						if(jsonArray.length > 0)
-						{
-							/* alert(JSON.stringify(jsonArray)); */
-							document.getElementById("emailid").innerHTML = "Already registered";
-							$(document).ready(function() {
-								 $('#register').attr('disabled', 'disabled');
-					        });
+
+						var jsonArray = JSON.parse(xmlhttp1.responseText); 
+						//alert(JSON.stringify(jsonArray));
+						if(jsonArray.length > 0){
+							document.getElementById("emailid").innerHTML="Already registered";
+							if(document.getElementById("passerror").innerHTML=="" && document.getElementById("passsuccess").innerHTML==""){
+							$(document).ready(function(){
+								$('#register').attr('disabled','disabled');	
+								submitstat=1;
+							});
+							}
+							else if(document.getElementById("passerror").innerHTML=="password does not match"){
+								$('#register').attr('disabled','disabled');
+							}
+							else{
+								$('#register').attr('disabled','disabled');
+							}
+							
+							
 						}
-						else
-						{
-							/* alert(JSON.stringify(jsonArray)); */
-							document.getElementById("emailid").innerHTML = "Available";
-							document.getElementById("emailid").color = "green";
+						else{
+							document.getElementById("emailid").innerHTML="Available";
+							if(document.getElementById("passerror").innerHTML=="password does not match"){
+								$('#register').attr('disabled','disabled');
+							}
+							else if(document.getElementById("passerror").innerHTML=="" && document.getElementById("passsuccess").innerHTML==""){
+									$('#register').attr('disabled','disabled');	
+								}
+							else if(document.getElementById("passsuccess").innerHTML=="password match"){
 							$('#register').removeAttr('disabled');
+							
 						}
+					}
 					}
 						
 				}	
@@ -128,7 +156,7 @@
 					}
 					
 				}	
-				xmlhttp1.open("get","${pageContext.request.contextPath}/areaController?flag=loadCity&stateId="+stateId.value, true)
+				xmlhttp1.open("get","${pageContext.request.contextPath}/regController?flag=loadCity&stateId="+stateId.value, true)
 				xmlhttp1.send();
 				/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
 				/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
@@ -171,7 +199,7 @@
 					}
 				}
 				
-				xmlhttp.open("get","${pageContext.request.contextPath}/areaController?flag=loadState&countryId="+countryId.value, true)
+				xmlhttp.open("get","${pageContext.request.contextPath}/regController?flag=loadState&countryId="+countryId.value, true)
 				xmlhttp.send();
 				/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
 				/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
@@ -257,7 +285,8 @@
                     		<label class="col-sm-3 control-label">Confirm Password<span class="text-danger">*</span></label>
                     		<div class="col-sm-8">
                       			<input type="password" class="form-control" id="cpass" onchange="validation()"  placeholder="Confirm" required>
-                      			<label class="text-danger" id="cpassLabel"></label>
+                      			<label class="text-danger" id="passerror"></label>
+                      			<label class="text-success" id="passsuccess"></label>
                     		</div> 
                   		</div>
                     </fieldset> 

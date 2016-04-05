@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.mysql.jdbc.ResultSet;
 
 import DAO.CountryDAO;
+import DAO.areaDAO;
 import DAO.cityDAO;
 import DAO.loginDAO;
 import DAO.registrationDAO;
@@ -52,7 +53,55 @@ public class regController extends HttpServlet {
 		{
 			loadEmail(request,response);
 		}
+		if(flag.equals("searchUser"))
+		{
+			searchUser(request,response);
+		}
+		if(flag.equals("loadState"))
+		{
+			loadState(request, response);
+		}
+		if(flag.equals("loadCity"))
+		{
+			loadCity(request,response);
+		}
 	}
+	private void loadCity(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int stateId=Integer.parseInt(request.getParameter("stateId"));
+		StateVO stateVo=new StateVO();
+		stateVo.setStateId(stateId);
+		registrationDAO regDao = new registrationDAO();
+		List ls = regDao.loadCity(stateVo);
+		HttpSession session = request.getSession();
+		session.setAttribute("cityList", ls);
+		response.sendRedirect("Admin/JASON/loadCity.jsp");
+	}
+
+	private void loadState(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int countryId=Integer.parseInt(request.getParameter("countryId"));
+		CountryVO countryVo=new CountryVO();
+		countryVo.setCid(countryId);
+		registrationDAO regDAO = new registrationDAO();
+		List ls=regDAO.loadState(countryVo);
+		HttpSession session = request.getSession();
+		session.setAttribute("stateList", ls);
+		response.sendRedirect("Admin/JASON/loadState.jsp");
+	}
+	private void searchUser(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		registrationVO regVO = new registrationVO();
+		registrationDAO regDAO = new registrationDAO();
+		List ls = regDAO.searchUser(regVO);
+		HttpSession session = request.getSession();
+		session.setAttribute("userList", ls);
+		response.sendRedirect("Admin/ViewUserInfo.jsp");
+	}
+
 	private void loadEmail(HttpServletRequest request,
 			HttpServletResponse response)throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -97,7 +146,6 @@ public class regController extends HttpServlet {
 			String lastName = request.getParameter("lastName");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
-			String cpass = request.getParameter("confirmPassword");
 			String dob = request.getParameter("dob");
 			String gender = request.getParameter("gender");
 			if(gender.equals("male"))

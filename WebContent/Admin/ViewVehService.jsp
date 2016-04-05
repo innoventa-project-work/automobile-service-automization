@@ -68,6 +68,7 @@
                                  <th  class="sort-alpha">Service Name</th>
                                  <th>Service Description</th>
                                  <th>Category Of Service</th>
+                                 <th>Action</th>
                               </tr>
                            </thead>
                              <tbody>
@@ -76,6 +77,15 @@
 				<td>${i.serviceId}</td>
 				<td>${i.serviceName}</td>
 				<td>${i.serviceDescription}</td>	
+				<td>${i.vc.category}</td>
+				<td>
+					<div class="btn-group mb-sm"><button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" type="button" >Action<span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="<%=request.getContextPath()%>/serviceController?flag=editService&serviceId=${i.serviceId}">Edit</a></li>
+							<li><a href="">DELETE</a></li>
+						</ul>
+					</div>
+				</td>
 			</tr>
 		</c:forEach>
               <c:remove var="servicesList" scope="session" />

@@ -68,7 +68,7 @@
                                  <th  class="sort-alpha">Area Name</th>
                                  <th>Area Description</th>
                                  <th>City Of Area</th>
-                                 
+                                 <th>Action</th>
                               </tr>
                            </thead>
                            <tbody>

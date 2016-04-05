@@ -65,11 +65,11 @@
                            <thead>
                               <tr>
                                  <th>No.</th>
-                                 <th  class="sort-alpha">Model Name</th>
+                                 <th class="sort-alpha">Model Name</th>
                                  <th>Model Description</th>
-                                 <th>Company Of Model</th>
+                                 <th>Category</th>
+                                 <th>Company</th>
                                  <th>Action</th>
-                                 
                               </tr>
                            </thead>
                             <tbody>
@@ -79,7 +79,8 @@
 				<td>${i.modelid}</td>
 				<td>${i.modelName}</td>
 				<td>${i.modelDescription}</td>
-				<td>${i.cv.companyName}</td>
+				<td>${i.vcVO.category}</td>
+				<td>${i.companyVO.companyName}</td>
 				<td>
 				<div class="btn-group mb-sm"><button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" type="button" >Action<span class="caret"></span></button>
 				<ul class="dropdown-menu" role="menu">

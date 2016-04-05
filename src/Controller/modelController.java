@@ -1,5 +1,6 @@
 package Controller;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.VehicleCategoryDAO;
 import DAO.companyDAO;
 import DAO.modelDAO;
 import VO.VehicleCategoryVO;
@@ -38,37 +40,54 @@ public class modelController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String flag=request.getParameter("flag");
-		if(flag.equals("searchCompany")){
+		if(flag.equals("searchCategory"))
+		{
 			
-			searchCompany(request,response);
+			searchCategory(request,response);
 		}
-		if(flag.equals("searchModel")){
-			
+		if(flag.equals("searchModel"))
+		{	
 			searchModel(request,response);
 		}
 		if(flag.equals("editModel")){
 			editModel(request,response);
 		}
+		if(flag.equals("loadCompany"))
+		{
+			loadCompany(request,response);
+		}
+	}
+
+	private void searchCategory(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		VehicleCategoryVO vcVO = new VehicleCategoryVO();
+		modelDAO modelDAO = new modelDAO();
+		List ls = modelDAO.SearchVehCategory(vcVO);
+		HttpSession session = request.getSession();
+		session.setAttribute("categoryList", ls);
+		response.sendRedirect("Admin/AddVehModel.jsp");
 	}
 
 	private void editModel(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int modelid=Integer.parseInt(request.getParameter("modelId"));
-		companyVO cv = new companyVO();
-		companyDAO cd = new companyDAO();
-		List companylist = new ArrayList();
-		companylist=cd.searchCompany(cv);
 		
-		modelVO mv = new modelVO();
-		modelDAO md = new modelDAO();
-		mv.setModelid(modelid);
-		List ls=new ArrayList();
-		ls=md.editModel(mv);
-		System.out.println(ls);
+		int modelid=Integer.parseInt(request.getParameter("modelId"));
+		modelVO modelVO = new modelVO();
+		modelVO.setModelid(modelid);
+		modelDAO modelDAO = new modelDAO();
+		List ls = modelDAO.searchModel(modelVO);
+		VehicleCategoryVO vcVO = new VehicleCategoryVO();
+		VehicleCategoryDAO vcDAO = new VehicleCategoryDAO();
+		List categoryls = vcDAO.SeearchVehCategory(vcVO);
+		companyVO companyVO = new companyVO();
+		companyDAO companyDAO = new companyDAO();
+		List companyls = companyDAO.searchCompany(companyVO);
 		HttpSession session=request.getSession();
 		session.setAttribute("modelList", ls);
-		session.setAttribute("companylist", companylist);
+		session.setAttribute("categoryList", categoryls);
+		session.setAttribute("companyList", companyls);
 		response.sendRedirect("Admin/EditModel.jsp");
 	}
 
@@ -81,18 +100,6 @@ public class modelController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("modelList", ls);
 		response.sendRedirect("Admin/ViewVehModel.jsp");
-	}
-
-	private void searchCompany(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-			companyVO cv = new companyVO();
-			modelDAO md = new modelDAO();
-			List ls = md.searchCompany(cv);
-			HttpSession session = request.getSession();
-			session.setAttribute("companyList", ls);
-			response.sendRedirect("Admin/AddVehModel.jsp");
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -109,25 +116,41 @@ public class modelController extends HttpServlet {
 		{
 			updateModel(request,response);
 		}
-
 }
+
+	private void loadCompany(HttpServletRequest request,
+			HttpServletResponse response)throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+		VehicleCategoryVO vcVO = new VehicleCategoryVO();
+		vcVO.setVcid(categoryId);
+		modelDAO modealDAO = new modelDAO();
+		List ls = modealDAO.loadModel(vcVO);
+		HttpSession session = request.getSession();
+		session.setAttribute("companyList", ls);
+		response.sendRedirect("Admin/JASON/loadCompany.jsp");
+	}
 
 	private void updateModel(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int categoryId = Integer.parseInt(request.getParameter("categoryName"));
+		int companyId = Integer.parseInt(request.getParameter("companyName"));
 		int modelid= Integer.parseInt(request.getParameter("modelId"));
 		String modelName=request.getParameter("modelName");
 		String modelDescription=request.getParameter("modelDescription");
-		String companyname=request.getParameter("companyName");
-		modelVO mv = new modelVO();
-		companyVO cv = new  companyVO();
-		cv.setComid(Integer.parseInt(companyname));
-		mv.setModelid(modelid);
-		mv.setModelName(modelName);
-		mv.setModelDescription(modelDescription);
-		mv.setCv(cv);
+		modelVO modelVO = new modelVO();
+		VehicleCategoryVO vcVO = new VehicleCategoryVO();
+		companyVO companyVO = new companyVO();
+		vcVO.setVcid(categoryId);
+		companyVO.setComid(companyId);
+		modelVO.setModelid(modelid);
+		modelVO.setModelName(modelName);
+		modelVO.setModelDescription(modelDescription);
+		modelVO.setVcVO(vcVO);
+		modelVO.setCompanyVO(companyVO);
 		modelDAO md = new modelDAO();
-		md.updateModel(mv);
+		md.updateModel(modelVO);
 		searchModel(request, response);
 		
 	}
@@ -135,19 +158,22 @@ public class modelController extends HttpServlet {
 	private void insertModel(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String companyName=request.getParameter("companyName");
+		int categoryId = Integer.parseInt(request.getParameter("categoryName"));
+		int companyId = Integer.parseInt(request.getParameter("companyId"));
 		String modelName=request.getParameter("modelName");
 		String modelDescription=request.getParameter("modelDescription");
 		HttpSession session = request.getSession();
-		companyVO cv = new companyVO();
-		modelVO mv = new modelVO();
-		cv.setComid(Integer.parseInt(companyName));
-		mv.setModelName(modelName);
-		mv.setModelDescription(modelDescription);
-		mv.setCv(cv);
+		VehicleCategoryVO vcVO = new VehicleCategoryVO();
+		companyVO companyVO = new companyVO();
+		modelVO modelVO = new modelVO();
+		vcVO.setVcid(categoryId);
+		companyVO.setComid(companyId);
+		modelVO.setModelName(modelName);
+		modelVO.setModelDescription(modelDescription);
+		modelVO.setVcVO(vcVO);
+		modelVO.setCompanyVO(companyVO);
 		modelDAO md = new modelDAO();
-		md.InsertModel(mv);
+		md.InsertModel(modelVO);
 		response.sendRedirect("Admin/AddVehModel.jsp");
-		
 	}
 }

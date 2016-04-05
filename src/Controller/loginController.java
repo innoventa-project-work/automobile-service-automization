@@ -33,7 +33,22 @@ public class loginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String flag = request.getParameter("flag");
+		if(flag.equals("searchLogin"))
+		{
+			searchLoginDetails(request,response);
+		}
+	}
+
+	private void searchLoginDetails(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		loginVO loginVO = new loginVO();
+		loginDAO loginDAO = new loginDAO();
+		List ls = loginDAO.searchLoginDetails(loginVO);
+		HttpSession session = request.getSession();
+		session.setAttribute("loginList", ls);
+		response.sendRedirect("Admin/ViewLoginDetails.jsp");
 	}
 
 	private void checkUser(HttpServletRequest request,

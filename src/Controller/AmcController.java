@@ -39,6 +39,24 @@ public class AmcController extends HttpServlet {
 		{
 			searchAmc(request,response);
 		}
+		if(flag.equals("editAmc"))
+		{
+			editAmc(request,response);
+		}
+	}
+
+	private void editAmc(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int amcid = Integer.parseInt(request.getParameter("amcId"));
+		AmcVO amcVO = new AmcVO();
+		AmcDAO amcDAO = new AmcDAO();
+		amcVO.setAmcid(amcid);
+		List ls = amcDAO.editAmc(amcVO);
+		HttpSession session = request.getSession();
+		session.setAttribute("amcList", ls);
+		response.sendRedirect("Admin/EditAmc.jsp");
+		
 	}
 
 	private void searchAmc(HttpServletRequest request,
@@ -57,20 +75,49 @@ public class AmcController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String flag=request.getParameter("flag");
+		String flag = request.getParameter("flag");
+		if(flag.equals("updateAmc"))
+		{
+			updateAmc(request,response);
+		}
+		
 		if(flag.equals("insertAmc"))
 		{
-			String s1 = request.getParameter("amcTitle");
-			String s2 = request.getParameter("amcPrice");
-			String s3 = request.getParameter("amcDescription");
-			AmcVO v=new AmcVO();
-			v.setAmctitle(s1);
-			v.setAmcprice(s2);
-			v.setAmcdesc(s3);
-			AmcDAO d=new AmcDAO();
-			d.InsertAmc(v);
-			response.sendRedirect("Admin/AddAmc.jsp");
+			insertAmc(request,response);
+			
 		}
+	}
+
+	private void insertAmc(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String s1 = request.getParameter("amcTitle");
+		String s2 = request.getParameter("amcPrice");
+		String s3 = request.getParameter("amcDescription");
+		AmcVO v=new AmcVO();
+		v.setAmctitle(s1);
+		v.setAmcprice(s2);
+		v.setAmcdesc(s3);
+		AmcDAO d=new AmcDAO();
+		d.InsertAmc(v);
+		response.sendRedirect("Admin/AddAmc.jsp");
+	}
+
+	private void updateAmc(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int amcId = Integer.parseInt(request.getParameter("amcId"));
+		String amcTitle = request.getParameter("amcTitle");
+		String amcPrice = request.getParameter("amcPrice");
+		String AmcDesc = request.getParameter("amcDescription");
+		AmcVO amcVO = new AmcVO();
+		amcVO.setAmcid(amcId);
+		amcVO.setAmctitle(amcTitle);
+		amcVO.setAmcprice(amcPrice);
+		amcVO.setAmcdesc(AmcDesc);
+		AmcDAO amcDAO = new AmcDAO();
+		amcDAO.updateAMC(amcVO);
+		searchAmc(request, response);
 	}
 
 }

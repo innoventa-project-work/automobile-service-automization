@@ -17,6 +17,7 @@
 		<property name="modelDescription">
 			<column name="modelDescription" />
 		</property>
-		<many-to-one class="VO.companyVO" name="cv" column="comid"></many-to-one>
+		<many-to-one class="VO.VehicleCategoryVO" name="vcVO" column="VehicleCategoryId"></many-to-one>
+		<many-to-one class="VO.companyVO" name="companyVO" column="companyId"></many-to-one>
 	</class>
 </hibernate-mapping>

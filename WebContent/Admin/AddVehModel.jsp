@@ -30,6 +30,50 @@
    <script src="js/modernizr.js" type="application/javascript"></script>
    <!-- FastClick for mobiles-->
    <script src="js/fastclick.js" type="application/javascript"></script>
+   <script type="text/javascript">
+   function loadCompany() 
+  	{
+		var categoryId=document.getElementById("categoryName");	
+		var xmlhttp = new XMLHttpRequest();
+		
+		removeAllCompany();
+		
+		xmlhttp.onreadystatechange = function()
+		{
+			if (xmlhttp.readyState == 4) 
+			{
+				var jsonArray = JSON.parse(xmlhttp.responseText);
+				alert(JSON.stringify(jsonArray));
+				for(var i=0; i<jsonArray.length ; i++)
+				{
+					var createOption=document.createElement("option");
+					
+					createOption.value=jsonArray[i].companyId;
+					createOption.text=jsonArray[i].companyName;
+					document.modelForm.companyId.options.add(createOption);
+				}
+			}
+		}
+		
+		xmlhttp.open("get","${pageContext.request.contextPath}/modelController?flag=loadCompany&categoryId="+categoryId.value, true)
+		xmlhttp.send();
+		/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
+		/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
+			0: request not initialized
+			1: server connection established
+			2: request received
+			3: processing request
+			4: request finished and response is ready */
+	}
+   
+  	function removeAllCompany() {
+  		var removeState=document.modelForm.companyId.options.length;
+		for(i=removeState ; i>0 ; i-- )
+		{
+			document.modelForm.companyId.remove(i);
+		}
+	}
+   </script>
 </head>
 
 <body>
@@ -59,33 +103,37 @@
             <div class="panel panel-default">
                <div class="panel-heading">Add Model</div>
                <div class="panel-body">
-                 <form method="post" action="<%=request.getContextPath()%>/modelController" class="form-horizontal">
-                     
-                      <fieldset>
+                 <form method="post" name="modelForm" action="<%=request.getContextPath()%>/modelController" class="form-horizontal"> 	                     
+                     <fieldset>
                         <div class="form-group">
-
-                            <!-- <div class="btn-group">
-                             <button class="btn btn-default dropdown-toggle" data-play="fadeIn" data-toggle="dropdown">Kai b<b class="caret"></b>
-                             </button> -->
-                             <label class="col-sm-2 control-label">Select Company</label>
-						<div class="col-sm-10">
-                        <select class="form-control m-b" name="companyName">
-                        <!-- <option value="0"> Select Country</option>
-                         -->	<c:forEach items="${sessionScope.companyList}" var="i">
-                        		<option class="default" value="${i.comid}">${i.companyName}</option>
-                        	</c:forEach>
-                        </select>
-                    
-                     </div>
-                      </div>
+                            <label class="col-sm-2 control-label">Select Category</label>
+							<div class="col-sm-10">
+                      	  		<select class="form-control m-b" name="categoryName" onchange="loadCompany()" id="categoryName">
+	                        		<option>Select One</option>
+	                        		<c:forEach items="${sessionScope.categoryList}" var="i">
+	                        			<option class="default" value="${i.vcid}">${i.category}</option>
+	                        		</c:forEach>
+                        		</select>
+                     		</div>
+                      	</div>
                      </fieldset>
                      
+                     <fieldset>
+                        <div class="form-group">
+                             <label class="col-sm-2 control-label">Select Company</label>
+							<div class="col-sm-10">
+                        		<select class="form-control m-b" name="companyId" id="companyId">
+                        			<option value="">Select Company</option>
+                        		</select>
+                     		</div>
+                        </div>
+                     </fieldset>
                      
                      <fieldset>
                         <div class="form-group">
                            <label class="col-sm-2 control-label">Model Name</label>
                            <div class="col-sm-10">
-                              <input type="text" name="modelName" required="required" placeholder="Model Name" class="form-control">
+                               <input type="text" name="modelName" required="required" placeholder="Model Name" class="form-control">
                            </div>
                         </div>
                      </fieldset>

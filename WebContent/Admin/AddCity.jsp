@@ -102,10 +102,7 @@
             <div class="panel panel-default">
                <div class="panel-heading">Add City</div>
                <div class="panel-body">
-               
-               
                <form method="post" action="<%=request.getContextPath()%>/cityController" name="cityForm" class="form-horizontal">
-                     
                       <fieldset>
                         <div class="form-group">
                              <label class="col-sm-2 control-label">Select Country</label>
