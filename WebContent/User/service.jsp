@@ -35,7 +35,8 @@
 		<div class="layout-theme animated-css"  data-header="sticky" data-header-top="200"  >
 			<div id="wrapper">
 
-				<jsp:include page="Menu.jsp"></jsp:include>
+	 <jsp:include page="userMenu.jsp"></jsp:include>
+
 				
 				
 				

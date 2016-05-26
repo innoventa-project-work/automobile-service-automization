@@ -35,7 +35,7 @@
                 <div id="navbar-collapse-1" class="navbar-collapse collapse">
                   <ul class="nav navbar-nav">
                     <li><a href="index.jsp">HOME</a></li>
-                    <li><a href="service.jsp">VEHICLE LISTINGS</a> </li>
+                    <!-- <li><a href="service.jsp">VEHICLE LISTINGS</a> </li>
                     <li><a href="$">CAR DETAILS</a></li>
                     <li class="dropdown" ><a href="#">NEWS</a>
                       <ul role="menu" class="dropdown-menu">
@@ -43,7 +43,7 @@
                         <li> <a href="#">DROPDOWN</a> </li>
                       </ul>
                     </li>
-                    <li><a href="<%=request.getContextPath()%>/User/login.jsp">Login</a></li>
+ -->                    <li><a href="<%=request.getContextPath()%>/User/login.jsp">Login</a></li>
                     <li><a href="<%=request.getContextPath()%>/regController?flag=searchCountry">REGISTRATION</a></li>
                   </ul>
                 </div>
